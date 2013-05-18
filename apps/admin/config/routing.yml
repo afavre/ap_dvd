@@ -1,0 +1,207 @@
+video_video:
+  class: sfPropelRouteCollection
+  options:
+    model:                Video
+    module:               video
+    prefix_path:          /video
+    column:               id
+    with_wildcard_routes: true
+
+personne:
+  class: sfPropelRouteCollection
+  options:
+    model:                Personne
+    module:               personne
+    prefix_path:          /personne
+    column:               id
+    with_wildcard_routes: true
+
+sauvegarde_visiteur:
+  class: sfPropelRouteCollection
+  options:
+    model:                SauvegardeVisiteur
+    module:               visiteur
+    prefix_path:          /visiteur
+    column:               id
+    with_wildcard_routes: true
+
+acteur_acteur:
+  class: sfPropelRouteCollection
+  options:
+    model:                Acteur
+    module:               acteur
+    prefix_path:          /acteur
+    column:               id
+    with_wildcard_routes: true
+
+motscle:
+  class: sfPropelRouteCollection
+  options:
+    model:                motscle
+    module:               motscle
+    prefix_path:          /motscle
+    column:               id
+    with_wildcard_routes: true
+
+utilisateur:
+  class: sfPropelRouteCollection
+  options:
+    model:                utilisateur
+    module:               utilisateur
+    prefix_path:          /utilisateur
+    column:               id
+    with_wildcard_routes: true
+
+version:
+  class: sfPropelRouteCollection
+  options:
+    model:                version
+    module:               version
+    prefix_path:          /version
+    column:               id
+    with_wildcard_routes: true
+
+serie:
+  class: sfPropelRouteCollection
+  options:
+    model:                serie
+    module:               serie
+    prefix_path:          /serie
+    column:               id
+    with_wildcard_routes: true
+
+saison:
+  class: sfPropelRouteCollection
+  options:
+    model:                saison
+    module:               saison
+    prefix_path:          /saison
+    column:               id
+    with_wildcard_routes: true
+
+saga:
+  class: sfPropelRouteCollection
+  options:
+    model:                saga
+    module:               saga
+    prefix_path:          /saga
+    column:               id
+    with_wildcard_routes: true
+
+realisateur:
+  class: sfPropelRouteCollection
+  options:
+    model:                realisateur
+    module:               realisateur
+    prefix_path:          /realisateur
+    column:               id
+    with_wildcard_routes: true
+
+qualite:
+  class: sfPropelRouteCollection
+  options:
+    model:                qualite
+    module:               qualite
+    prefix_path:          /qualite
+    column:               id
+    with_wildcard_routes: true
+
+nationalite:
+  class: sfPropelRouteCollection
+  options:
+    model:                nationalite
+    module:               nationalite
+    prefix_path:          /nationalite
+    column:               id
+    with_wildcard_routes: true
+
+groupe:
+  class: sfPropelRouteCollection
+  options:
+    model:                groupe
+    module:               groupe
+    prefix_path:          /groupe
+    column:               id
+    with_wildcard_routes: true
+
+video:
+  class: sfPropelRouteCollection
+  options:
+    model:                video
+    module:               video
+    prefix_path:          /video
+    column:               id
+    with_wildcard_routes: true
+
+commentaireserie:
+  class: sfPropelRouteCollection
+  options:
+    model:                commentaireserie
+    module:               commentaireserie
+    prefix_path:          /commentaireserie
+    column:               id
+    with_wildcard_routes: true
+
+commentairerealisateur:
+  class: sfPropelRouteCollection
+  options:
+    model:                commentairerealisateur
+    module:               commentairerealisateur
+    prefix_path:          /commentairerealisateur
+    column:               id
+    with_wildcard_routes: true
+
+commentairevideo:
+  class: sfPropelRouteCollection
+  options:
+    model:                commentairevideo
+    module:               commentairevideo
+    prefix_path:          /commentairevideo
+    column:               id
+    with_wildcard_routes: true
+
+commentaireacteur:
+  class: sfPropelRouteCollection
+  options:
+    model:                commentaireacteur
+    module:               commentaireacteur
+    prefix_path:          /commentaireacteur
+    column:               id
+    with_wildcard_routes: true
+
+categorie:
+  class: sfPropelRouteCollection
+  options:
+    model:                categorie
+    module:               categorie
+    prefix_path:          /categorie
+    column:               id
+    with_wildcard_routes: true
+
+acteur:
+  class: sfPropelRouteCollection
+  options:
+    model:                acteur
+    module:               acteur
+    prefix_path:          /acteur
+    column:               id
+    with_wildcard_routes: true
+
+
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: video, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+

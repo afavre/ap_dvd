@@ -1,0 +1,30 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           episode
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              episode
+    plural:                episodes
+    route_prefix:          episode
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        is_public: { label: "Public?" }
+        created_at:  { label: "Crée le "}
+        updated_at:  { label: "Modifiée le "}
+      list:
+        title:  Gestion Episode
+        display:  [saison,titre,numero,qualite,version]
+      filter:  ~
+      form:
+        class: AdminEpisodeForm
+      edit:
+        title: Modification Episode <span class="titredyn">"%%saison%%x%%numero%%"</span>
+      new:
+        title: Nouvel Episode
+

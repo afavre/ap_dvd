@@ -1,0 +1,30 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           acteur
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              acteur
+    plural:                acteurs
+    route_prefix:          acteur
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:  
+        display: [id, nom, prenom]
+        sort: [nom , desc]
+        batch_actions: 
+           maj: ~
+           _delete: ~ 
+        title: Gestion Acteurs
+      filter:  ~
+      form:
+         class: AdminActeurForm
+      edit:    
+         title: Modification <span class="titredyn">"%%prenom%% %%nom%%"</span>
+      new:
+         title: Nouvel Acteur

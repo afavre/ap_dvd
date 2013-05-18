@@ -1,0 +1,24 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           motscle
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              motscle
+    plural:                motscles
+    route_prefix:          motscle
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: Gestion Mots-cle
+      filter:  ~
+      form:    ~
+      edit:    
+         title: Modification <span class="titredyn">"%%mot%%"</span>
+      new:
+         title: Nouveau Mot-cle

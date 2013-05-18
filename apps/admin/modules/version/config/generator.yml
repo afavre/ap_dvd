@@ -1,0 +1,24 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           version
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              version
+    plural:                versions
+    route_prefix:          version
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: Gestion Versions
+      filter:  ~
+      form:    ~
+      edit:    
+         title: Modification Version <span class="titredyn">"%%nom%%"</span>
+      new:
+         title: Nouvel Version

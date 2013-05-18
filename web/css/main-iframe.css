@@ -1,0 +1,96 @@
+
+Nom du Thème : BradGlobes
+Auteur : Neolien (http://annuaire.webdconseils.com/)
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-size: 62.5%;
+	font-family: Arial, Helvetica, sans-serif;
+        font-size:11px;
+	color: #000;
+	background: url("../js/onglet/images/23_fine_grain.png");
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+        outline: none;
+}
+
+.right{
+	float:right;
+}
+
+#text{
+	font-size:12pt;
+	margin-bottom:20px;
+}
+#textCom{
+	font-size:12pt;
+	margin-bottom:10px;
+}
+
+.good{
+	color:#6ac04a;
+	font-weight:bold;
+}
+
+.bad{
+	color:#e13535;
+	font-weight:bold;
+}
+
+.neutre{
+	color:#c4c4c4;
+	font-weight:bold;
+}
+
+.note1{
+	color:#b10000;
+	font-weight:bold;
+}
+.note2{
+	color:#b12c2c;
+	font-weight:bold;
+}
+.note3{
+	color:#b15858;
+	font-weight:bold;
+}
+.note4{
+	color:#b18585;
+	font-weight:bold;
+}
+.note5{
+	color:#b1b1b1;
+	font-weight:bold;
+}
+.note6{
+	color:#8caf8c;
+	font-weight:bold;
+}
+.note7{
+	color:#69af69;
+	font-weight:bold;
+}
+.note8{
+	color:#46af46;
+	font-weight:bold;
+}
+.note9{
+	color:#23af23;
+	font-weight:bold;
+}
+.note10{
+	color:#00af00;
+	font-weight:bold;
+}
+
+#inscr{
+	
+}

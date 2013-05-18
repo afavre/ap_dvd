@@ -1,0 +1,30 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Personne
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              Personne
+    plural:                Personnes
+    route_prefix:          personne
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:  
+        display: [id, nom, prenom]
+        sort: [nom , desc]
+        batch_actions: 
+           maj: ~
+           _delete: ~ 
+        title: Gestion Personnes
+      filter:  ~
+      form:
+         class: AdminPersonneForm
+      edit:    
+         title: Modification <span class="titredyn">"%%prenom%% %%nom%%"</span>
+      new:
+         title: Nouvel Personne

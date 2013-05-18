@@ -1,0 +1,25 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           realisateur
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              realisateur
+    plural:                realisateurs
+    route_prefix:          realisateur
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields: ~
+      list:
+        title:  Gestion Realisateurs
+      filter:  ~
+      form:
+        class: AdminRealisateurForm
+      edit:
+        title: Modification Realisateur <span class="titredyn">"%%prenom%% %%nom%%"</span>
+      new:
+        title: Nouveau Realisateur

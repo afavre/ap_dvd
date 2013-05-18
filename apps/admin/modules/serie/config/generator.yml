@@ -1,0 +1,34 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           serie
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              serie
+    plural:                series
+    route_prefix:          serie
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        is_public: { label: "Public?" }
+        serieproprietaire_list: { label: "Propriétaire(s)" }
+        acteurserie_list: { label: "Acteurs" }
+        categorieserie_list: { label: "Catégorie(s)" }
+        created_at:  { label: "Crée le "}
+        updated_at:  { label: "Modifiée le "}
+      list:
+        title:  Gestion Series
+        display:  [_image,titre,format_duree,annee_diffusion]
+        sort: [created_at, desc]
+      filter:  ~
+      form:
+        class: AdminSerieForm
+      edit:
+        title: Modification Serie <span class="titredyn">"%%titre%%"</span>
+      new:
+        title: Nouvelle Serie
+

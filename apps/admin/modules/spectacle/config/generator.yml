@@ -1,0 +1,37 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Spectacle
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              Spectacle
+    plural:                Spectacles
+    route_prefix:          spectacle
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        is_public: { label: "Public?" }
+        filmproprietaire_list: { label: "Propriétaire(s)" }
+        categoriefilm_list: { label: "Catégorie(s)" }
+        created_at:  { label: "Crée le "}
+        updated_at:  { label: "Modifiée le "}
+      list:
+        title:  Gestion Spectacles
+        display:  [_image,_auteur,titre,qualite,duree,annee_sortie,_proprietaires]
+        sort: [created_at, desc]
+        batch_actions: 
+           _delete: ~ 
+           ajouter_a_aurel: ~ 
+           ajouter_a_pierre: ~ 
+           maj: ~
+      filter:  ~
+      form:
+        class: AdminSpectacleForm
+      edit:
+        title: Modification Spectacle <span class="titredyn">"%%titre%%"</span>
+      new:
+        title: Nouveau Spectacle

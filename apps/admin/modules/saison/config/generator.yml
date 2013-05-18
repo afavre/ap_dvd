@@ -1,0 +1,30 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           saison
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              saison
+    plural:                saisons
+    route_prefix:          saison
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        is_public: { label: "Public?" }
+        created_at:  { label: "Crée le "}
+        updated_at:  { label: "Modifiée le "}
+      list:
+        title:    Gestion Saisons
+        display:  [_image,titre,serie,numero,annee_diffusion,_nb_episode_tot]
+        sort:     [created_at, desc]
+      filter:  ~
+      form:
+        class: AdminSaisonForm
+      edit:
+        title: Modification Saison <span class="titredyn">"%%serie%% - Saison %%numero%%"</span>
+      new:
+        title: Nouvelle Saison

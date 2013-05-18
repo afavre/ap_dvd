@@ -1,0 +1,26 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           SauvegardeVisiteur
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              SauvegardeVisiteur
+    plural:                SauvegardeVisiteurs
+    route_prefix:          sauvegarde_visiteur
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields: ~
+      list:
+        title:  Gestion Visiteurs
+        display:  [_nom,adresse,_derniere_connection,_vu_films_de]
+        sort: [derniere_connection, desc]
+      filter:  ~
+      form:    ~
+      edit:
+        title: Modification Visiteur <span class="titredyn">"%%nom%%": %%adresse%%</span>
+      new:
+        title: Nouveau Visiteur

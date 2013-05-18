@@ -1,0 +1,38 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Video
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              video
+    plural:                videos
+    route_prefix:          video
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        is_public: { label: "Public?" }
+        videoproprietaire_list: { label: "Proprietaire(s)" }
+        acteurvideo_list: { label: "Acteur(s)" }
+        categorievideo_list: { label: "Categorie(s)" }
+        created_at:  { label: "Cree"}
+        updated_at:  { label: "Modifiee"}
+      list:
+        title:  Gestion Videos
+        display:  [_image,type,titre,qualite,version,duree,annee_sortie,_proprietaires]
+        sort: [created_at, desc]
+        batch_actions: 
+           _delete: ~ 
+           ajouter_a_aurel: ~ 
+           ajouter_a_pierre: ~ 
+           maj: ~
+      filter:  ~
+      form:
+        class: AdminVideoForm
+      edit:
+        title: Modification Video <span class="titredyn">"%%titre%%"</span>
+      new:
+        title: Nouveau Video
