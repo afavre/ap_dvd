@@ -48,34 +48,45 @@ class Allocine
     public function get_movie($id)
     {
         // build the params
-        $params = array(
-            'fichefilm_gen_cfilm' => $id,
-        );
+        // $params = array(
+            // 'fichefilm_gen_cfilm' => $id,
+        // );
 
         // do the request
-        $sortie_html = $this->_do_request('film', $params);
-
-		//$movie est un string, on veut le transformer en array
-		$response = $this->infos_film($sortie_html);
+        // $sortie_html = $this->_do_request('film', $params);
 		
-        return $response;
+
+		// $movie est un string, on veut le transformer en array
+		// $response = $this->infos_film($sortie_html);
+
+ 
+		$movie_temp = $this->json('movie',$id);
+
+		$response = str_replace('"$"', '"value"', $movie_temp);
+		
+		$movie_object = json_decode($response, false);
+		$movie = $movie_object->movie;
+		
+		
+        return $movie;
     }
 
     public function get_person($id, $profile)
     {
         // build the params
-        $params = array(
-            'partner' => $this->_partner_key,
-            'code' => $id,
-            'profile' => $profile,
-            'filter' => 'person',
-            'striptags' => 'synopsis,synopsisshort',
-            'format' => 'json',
-        );
+        // $params = array(
+            // 'partner' => $this->_partner_key,
+            // 'code' => $id,
+            // 'profile' => $profile,
+            // 'filter' => 'person',
+            // 'striptags' => 'synopsis,synopsisshort',
+            // 'format' => 'json',
+        // );
 
         // do the request
-        $response_encode = $this->_do_request('person', $params);
-
+        // $response_encode = $this->_do_request('person', $params);
+		$response_encode =$this->json('person',$id);
+		
 		$response_encode = str_replace('"$"', '"value"', $response_encode);
 		//$person est un string, on veut le transformer en array
 		$response_decode = json_decode($response_encode);
@@ -337,6 +348,185 @@ class Allocine
 		
         return $tab;
     }
+	
+	function json($type, $data)
+    {
+$nb_min = 10;
+$nb_max = 99;
+$nombre_aleatoire = mt_rand($nb_min,$nb_max);
+ 
+ 
+    if( ($type == 'search') )
+        {  
+echo 'search'; 
+            if(!empty($_GET['page']))
+                {
+            $page = $_GET['page'];
+                }
+            else
+                {
+            $page = 1;
+                }
+$data = str_replace(array('+'), ' ', $data);
+        $parametres = array(
+            'partner' => '100043982026',
+            'filter' => 'movie,tvseries,theater,person,news',
+            'count' => '25',
+            'page' => $page,
+            'q' => $data,
+            'format' => 'json');
+//-------------
+// krumo($parametres);
+$url = 'http://api.allocine.fr/rest/v3/'.$type;
+$secret = '29d185d98c984a359e6e6f26a0474269';
+$USERAGENT = 'Dalvik/1.6.0 (Linux; U; Android 4.0.3; SGH-T989 Build/IML'.$nombre_aleatoire.'K)';
+ 
+        $sed = date('Ymd');
+        $sig = urlencode(base64_encode(sha1($secret .http_build_query($parametres). '&sed=' .$sed, true)));
+        $url .= '?' .http_build_query($parametres). '&sed=' .$sed. '&sig=' .$sig;
+        // echo $url .= '?' .http_build_query($parametres). '&sed=' .$sed. '&sig=' .$sig;
+          
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_USERAGENT, $USERAGENT);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $informations = curl_exec($ch);
+        curl_close($ch);
+         
+        return $informations;
+//-------------
+        }
+    elseif(($type == 'movie') OR ($type == 'person') OR ($type == 'tvseries') OR ($type == 'season') OR ($type == 'episode') OR ($type == 'news') OR ($type == 'newslist') )
+        {
+            if($type == 'movie')
+                {
+$data =  $data;
+        $parametres = array(
+            'partner' => '100043982026',
+            'code' => $data,
+            'profile' => 'large',
+            'filter' => 'movie',
+            'striptags' => 'synopsis,synopsisshort,trivia,person,news,tvseries',
+            'format' => 'json');
+                }
+            elseif($type == 'person')
+                {
+$data =  $data;
+        $parametres = array(
+            'partner' => '100043982026',
+            'code' => $data,
+            'profile' => 'large',
+            'filter' => 'movie',
+            'striptags' => 'synopsis,synopsisshort,trivia,person,news,tvseries',
+            'format' => 'json');        
+                }  
+            elseif($type == 'tvseries')
+                {
+$data =  $data;
+        $parametres = array(
+            'partner' => '100043982026',
+            'code' => $data,
+            'profile' => 'large',
+            'filter' => 'movie,tvseries',
+            'format' => 'json');        
+                }  
+            elseif($type == 'season')
+                {
+$data =  $data;
+        $parametres = array(
+            'partner' => '100043982026',
+            'code' => $data,
+            'profile' => 'large',
+            'striptags' => 'synopsis,synopsisshort',
+            'format' => 'json');        
+                }      
+            elseif($type == 'episode')
+                {
+$data =  $data;
+        $parametres = array(
+            'partner' => '100043982026',
+            'code' => $data,
+            'profile' => 'large',
+            'striptags' => 'synopsis,synopsisshort',
+            'format' => 'json');        
+                }      
+            elseif($type == 'news')
+                {
+$data =  $data;
+        $parametres = array(
+            'partner' => '100043982026',
+            'code' => $data,
+            'profile' => 'large',
+            'striptags' => 'synopsis,synopsisshort',
+            'format' => 'json');        
+                }          
+            elseif($type == 'newslist')
+                {
+$data =  $data;
+                    if(!empty($_GET['page']))
+                        {
+                    $page = $_GET['page'];
+                        }
+                    else
+                        {
+                    $page = 1;
+                        }
+                         
+                    if( (@$_GET['newsparpage'] == 5) OR (@$_GET['newsparpage'] == 25))
+                        {
+                    $newsparpage = $_GET['newsparpage'];
+                        }
+                    else
+                        {
+                    $newsparpage = 25;
+                        }
+        $parametres = array(
+            'partner' => '100043982026',
+            'count' => $newsparpage,
+            'page' => $page,
+            'filter' => $data,
+            'format' => 'json');        
+                }  
+            else
+                {
+                }
+ 
+//-------------
+// krumo($parametres);
+$url = 'http://api.allocine.fr/rest/v3/'.$type;
+$secret = '29d185d98c984a359e6e6f26a0474269';
+$USERAGENT = 'Dalvik/1.6.0 (Linux; U; Android 4.0.3; SGH-T989 Build/IML'.$nombre_aleatoire.'K)';
+ 
+        $sed = date('Ymd');
+        $sig = urlencode(base64_encode(sha1($secret .http_build_query($parametres). '&sed=' .$sed, true)));
+        $url .= '?' .http_build_query($parametres). '&sed=' .$sed. '&sig=' .$sig;
+        // echo $url .= '?' .http_build_query($parametres). '&sed=' .$sed. '&sig=' .$sig;
+          
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_USERAGENT, $USERAGENT);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $informations = curl_exec($ch);
+        curl_close($ch);
+         
+        return $informations;
+//-------------
+ 
+        }
+    else
+        {
+echo $informations = 'Erreur: les accès a l\'api ce font avec ces mots clé: search, movie, person, tvseries, season';
+ 
+global $resultat;
+$resultat = 2;
+        return $informations;
+        }
+// filter: movie,theater,person,news,tvseries,theater,person,news,tvseries
+    }
+	
+	
 }
 /*
 class Allocine
@@ -442,3 +632,6 @@ class Allocine
     }
 }
 */
+
+
+

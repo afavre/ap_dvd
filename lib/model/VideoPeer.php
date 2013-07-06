@@ -22,6 +22,29 @@ define('ALLOCINE_SECRET_KEY', '29d185d98c984a359e6e6f26a0474269');
  
 class VideoPeer extends BaseVideoPeer {
 
+  static function array_to_obj($array, &$obj)
+  {
+    foreach ($array as $key => $value)
+    {
+      if (is_array($value))
+      {
+      $obj->$key = new stdClass();
+      self::array_to_obj($value, $obj->$key);
+      }
+      else
+      {
+        $obj->$key = $value;
+      }
+    }
+  return $obj;
+  }
+
+static function arrayToObject($array)
+{
+ $object= new stdClass();
+ return self::array_to_obj($array,$object);
+}
+
 
 
 
@@ -314,22 +337,15 @@ class VideoPeer extends BaseVideoPeer {
 		
 		
 		public static function InfosFilmAllocine($code){
-			//require_once(__DIR__.'/allocine.class.php');
-			
-			///////////////////////////////////////////////////////////////////////////
-			//Code Pierre (lecture HTML Allocine) -> marche (mais temporaire)
-			///////////////////////////////////////////////////////////////////////////
-			$allocine = new Allocine();
-			
-			
-			$movie = $allocine->get_movie($code);
-			// $movie = $helper->movie( $code, $profile );
-			//echo "film:";
-			//recuperation de tous les genres du film
-			//print_r($movie);
-			//echo $movie;
+		
+ 			$allocine = new Allocine();
+						
+			$movie = $allocine->get_movie($code); 
+
+			// print_r($movie2);
 			$titre = explode(":",$movie->title);
 			//$infos['titre'] = utf8_encode(ltrim(rtrim($titre[0])));
+			// echo($movie->movie->title);
 			$infos['titre'] = ltrim(rtrim($titre[0]));
 			//$infos['ss_titre'] = utf8_encode(ltrim(rtrim($titre[1])));
 			$infos['ss_titre'] = ltrim(rtrim($titre[1]));
@@ -341,7 +357,6 @@ class VideoPeer extends BaseVideoPeer {
 			$infos['avertissement'] = $movie->movieCertificate->certificate->value;
 
 			$infos['categorie'] = Array();
-			//echo $infos['resume'];
 			foreach($movie->genre as $ge ){
 				//$infos['categorie'][] = utf8_encode($ge->value);
 				$infos['categorie'][] = $ge->value;
@@ -710,5 +725,10 @@ class VideoPeer extends BaseVideoPeer {
 			$pager['getPreviousPage'] = $page_act-1;
 			return $pager;
 	   }
+	
+	   
+	   
+	   
+	   
 		
 } // VideoPeer
