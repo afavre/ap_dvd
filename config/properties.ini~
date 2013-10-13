@@ -1,0 +1,4 @@
+[symfony]
+  name=dvd
+  author=Your name here
+  orm=Propel

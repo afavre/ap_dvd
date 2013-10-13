@@ -1,0 +1,222 @@
+# config/schema.yml
+propel:
+
+  saga:
+    id:                   ~
+    titre:                { type: varchar(255), required: true, index: unique }
+
+  nationalite:
+    id:                   ~
+    pays:                 { type: varchar(255), required: true, index: unique }
+
+  personne:
+    id:                   ~
+    nom:                  { type: varchar(255), required: true }
+    prenom:               { type: varchar(255), required: true }
+    nom_prenom_clean:     { type: varchar(255), required: true, index: unique }
+    image:                { type: varchar(255) }
+    date_naissance:       { type: date }
+    date_deces:           { type: date }
+    nb_visite:            { type: integer}
+    nationalite_id:       { type: integer, foreignTable: nationalite, foreignReference: id }
+
+  qualite:
+    id:                   ~
+    nom:                  { type: varchar(255), required: true, index: unique }
+    description:          { type: longvarchar }
+
+  version:
+    id:                   ~
+    nom:                  { type: varchar(255), required: true, index: unique }
+
+  video:
+    id:                   ~
+    type:                 { type: varchar, sqltype: enum, size: "'film','spectacle','episode'", required: true }
+    saison_id:            { type: integer, foreignTable: saison, foreignReference: id }
+    numero:               { type: integer }
+    saga_id:              { type: integer, foreignTable: saga, foreignReference: id }
+    realisateur_id:       { type: integer, foreignTable: personne, foreignReference: id, required: true }
+    titre:                { type: varchar(255), required: true }
+    sous_titre:           { type: varchar(255) }
+    titre_original:       { type: varchar(255) }
+    titre_clean:          { type: varchar(255), required: true }
+    avertissement:        { type: longvarchar }
+    resume:               { type: longvarchar }
+    image:                { type: varchar(255) }
+    bande_annonce:        { type: varchar(255) }
+    annee_sortie:         { type: integer }
+    duree:                { type: integer }
+    qualite_id:           { type: integer, foreignTable: qualite, foreignReference: id, required: true }
+    version_id:           { type: integer, foreignTable: version, foreignReference: id }
+    nb_visite:            { type: integer }
+    is_public:            { type: boolean, required: true, default: 1 }
+    created_at:           ~
+    updated_at:           ~
+
+  serie:
+    id:                   ~
+    realisateur_id:       { type: integer, foreignTable: personne, foreignReference: id, required: true }
+    titre:                { type: varchar(255), required: true}
+    sous_titre:           { type: varchar(255) }
+    titre_original:       { type: varchar(255) }
+    titre_clean:          { type: varchar(255), required: true }
+    bande_annonce:        { type: varchar(255) }
+    image:                { type: varchar(255) }
+    resume:               { type: longvarchar }
+    annee_diffusion:      { type: varchar(255) }
+    format_duree:         { type: integer }
+    is_public:            { type: boolean, required: true, default: 1 }
+    nb_visite:            { type: integer }
+    created_at:           ~
+    updated_at:           ~
+
+  saison:
+    id:                   ~
+    serie_id:             { type: integer, foreignTable: serie, foreignReference: id, required: true }
+    numero:               { type: integer, required: true }
+    realisateur_id:       { type: integer, foreignTable: personne, foreignReference: id, required: true }
+    titre:                { type: varchar(255)}
+    sous_titre:           { type: varchar(255)}
+    titre_original:       { type: varchar(255)}
+    titre_clean:          { type: varchar(255)}
+    nb_episode_tot:       { type: integer }
+    nb_episode_possede:   { type: integer, default: 0 }
+    version_generale_id:  { type: integer, foreignTable: version, foreignReference: id }
+    bande_annonce:        { type: varchar(255) }
+    resume:               { type: longvarchar }
+    image:                { type: varchar(255) }
+    annee_diffusion:      { type: varchar(255) }
+    is_public:            { type: boolean, required: true, default: 1 }
+    nb_visite:            { type: integer }
+    created_at:           ~
+    updated_at:           ~
+
+
+  utilisateur:
+    id:                   ~
+    nom:                  { type: varchar(255) }
+    prenom:               { type: varchar(255) }
+    nom_prenom_clean:     { type: varchar(255) }
+    image:                { type: varchar(255) }
+    login:                { type: varchar(255), required: true }
+    pass:                 { type: varchar(255), required: true }
+    date_naissance:       { type: varchar(255) }
+    created_at:           ~
+    updated_at:           ~
+
+
+  noteserie:
+    id:                   ~
+    saison_id:            { type: integer, foreignTable: saison, foreignReference: id, required: true }
+    utilisateur_id:       { type: integer, foreignTable: utilisateur, foreignReference: id, required: true }
+    note:                 { type: integer, required: true }
+    message:              { type: longvarchar, required: true }
+    created_at:           ~
+    updated_at:           ~
+
+
+  notevideo:
+    id:                   ~
+    video_id:             { type: integer, foreignTable: video, foreignReference: id, required: true }
+    utilisateur_id:       { type: integer, foreignTable: utilisateur, foreignReference: id, required: true }
+    note:                 { type: integer, required: true }
+    message:              { type: longvarchar, required: true }
+    created_at:           ~
+    updated_at:           ~
+
+  commentaireacteur:
+    id:                   ~
+    acteur_id:            { type: integer, foreignTable: personne, foreignReference: id, required: true }
+    utilisateur_id:       { type: integer, foreignTable: utilisateur, foreignReference: id, required: true }
+    message:              { type: longvarchar, required: true }
+    created_at:           ~
+    updated_at:           ~
+
+  commentairerealisateur:
+    id:                   ~
+    realisateur_id:       { type: integer, foreignTable: personne, foreignReference: id, required: true }
+    utilisateur_id:       { type: integer, foreignTable: utilisateur, foreignReference: id, required: true }
+    message:              { type: longvarchar, required: true }
+    created_at:           ~
+    updated_at:           ~
+
+  categorie:
+    id:                   ~
+    nom:                  { type: varchar(255), required: true, index: unique }
+    nom_clean:            { type: varchar(255) }
+
+  motscle:
+    id:                   ~
+    mot:                  { type: varchar(255), required: true, index: unique }
+    mot_clean:            { type: varchar(255) }
+ 
+  acteurvideo:
+    id:                   ~
+    acteur_id:            { type: integer, foreignTable: personne, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    video_id:             { type: integer, foreignTable: video, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    created_at:           ~
+
+  acteurserie:
+    id:                   ~
+    acteur_id:            { type: integer, foreignTable: personne, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    saison_id:            { type: integer, foreignTable: saison, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    created_at:           ~
+
+  categorievideo:
+    id:                   ~
+    categorie_id:         { type: integer, foreignTable: categorie, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    video_id:             { type: integer, foreignTable: video, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+
+  categorieserie:
+    id:                   ~
+    categorie_id:         { type: integer, foreignTable: categorie, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    serie_id:             { type: integer, foreignTable: serie, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+
+  motsclevideo:
+    id:                   ~
+    motscle_id:           { type: integer, foreignTable: motscle, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    video_id:             { type: integer, foreignTable: video, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+
+  motscleserie:
+    id:                   ~
+    motscle_id:           { type: integer, foreignTable: motscle, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    saison_id:            { type: integer, foreignTable: saison, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+
+  noteserieAdmin:
+    id:                   ~
+    saison_id:            { type: integer, foreignTable: saison, foreignReference: id, required: true }
+    utilisateur_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true }
+    note:                 { type: integer, required: true }
+    message:              { type: longvarchar, required: true }
+    created_at:           ~
+    updated_at:           ~
+
+  notevideoAdmin:
+    id:                   ~
+    video_id:             { type: integer, foreignTable: video, foreignReference: id, required: true }
+    utilisateur_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true }
+    note:                 { type: integer, required: true }
+    message:              { type: longvarchar, required: true }
+    created_at:           ~
+    updated_at:           ~
+
+  videoproprietaire:
+    id:                   ~
+    video_id:             { type: integer, foreignTable: video, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    utilisateur_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    note:                 { type: integer }
+    created_at:           ~
+
+  serieproprietaire:
+    id:                   ~
+    serie_id:             { type: integer, foreignTable: serie, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    utilisateur_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, primaryKey: true, onDelete: cascade }
+    note:                 { type: integer }
+    created_at:           ~
+
+  sauvegarde_visiteur:
+    id:                   ~
+    nom:                  { type: varchar(255), default:'inconnu' }
+    adresse:              { type: varchar(15), required: true, index: unique }
+    derniere_connection:  { type: timestamp }
+    proprio_id:           { type: integer, default:0 }
