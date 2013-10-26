@@ -4,4 +4,7 @@
 /web/uploads/*
 /config/databases.yml
 /config/databases.yml~
+/config/ProjectConfiguration.class.php
+/config/ProjectConfiguration.class.php~
+
 
