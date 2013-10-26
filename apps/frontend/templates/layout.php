@@ -9,8 +9,6 @@
     <?php endif; ?>
 	
 	 </title>
-	
-
     <link rel="shortcut icon" href="/images/icone.png" />
 	
 	
