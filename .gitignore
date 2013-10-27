@@ -1,4 +1,4 @@
-/lib/vendor
+/lib/vendor/*
 /cache/*
 /log/*
 /web/uploads/*
