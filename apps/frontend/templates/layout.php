@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/film.css" />
 	<link rel="stylesheet" href="/js/onglet/jquery.ui.all.css">
 	
+	
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js">
 
  <!-- inclusion des librairies jQuery et jQuery UI (fichier principal et plugins) -->
