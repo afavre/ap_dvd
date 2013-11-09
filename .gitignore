@@ -6,5 +6,8 @@
 /config/databases.yml~
 /config/ProjectConfiguration.class.php
 /config/ProjectConfiguration.class.php~
+/.buildpath
+/.project
+/.settings/
 
 

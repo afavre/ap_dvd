@@ -33,7 +33,7 @@
 		<div id="textCom">
 		Merci de commenter votre note:
 		</div>
-		<form method="POST" action="<?php echo url_for('film/AjouterNoteFilmAdmin') ?>" >
+		<form method="post" action="<?php echo url_for('film/AjouterNoteFilmAdmin') ?>" >
 			<input type="hidden" name="note" value="<?php echo $note; ?>" />
 			<input type="hidden" name="id" value="<?php echo $film->getId(); ?>" />
 			<textarea name="comment" cols="33" rows="6"></textarea>
