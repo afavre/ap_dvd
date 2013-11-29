@@ -5,7 +5,7 @@ class Allocine
     private $_user_agent = 'Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)';
 
 
-/*     private function _do_request($method, $params)
+     private function _do_request($method, $params)
     {
 		$inter = '';
 		$ext = '.html';
@@ -15,20 +15,30 @@ class Allocine
 		}
         // build the URL
         $query_url = $this->_api_url.'/'.$method;
-
         // new algo to build the query
         
         $query_url .= '/'.$inter.http_build_query($params).$ext;
 
 		$parametres=array('Referer'=>'', 'Proxy'=>'', 'BrowserName'=>'Mozilla/4.0 (compatible; MSIE 6.0;Windows NT 5.0)');
 		$params='';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $query_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->_user_agent);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $html = curl_exec($ch);
+        curl_close($ch);
+		/*
+		echo $response;
 		if ($parametres['Referer']!="") $params.='-e '.$parametres['Referer'];
 		if ($parametres['Proxy']!="") $params.='-x '.$parametres['Proxy'];
 		if ($parametres['BrowserName']!="") $params.='-A "'.$parametres['BrowserName'].'"';
 		$html = (`curl $params $query_url`);
+		echo $html;
+		*/
 		
         return $html;
-    } */
+    } 
 
     public function search($query)
     {
